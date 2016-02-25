@@ -284,6 +284,9 @@ heightDidChangeBy:(CGFloat)height
     [UIView animateWithDuration:duration animations:^{
         [self __layoutSubviews];
     }];
+    if (_delegate && [_delegate respondsToSelector:@selector(textBar:heightDidChangeBy:withDuration:)]) {
+        [_delegate textBar:self heightDidChangeBy:height withDuration:duration];
+    }
 }
 
 - (void)textView:(LPFooterTextView *)textView textDidChangeTo:(NSString *)text {
@@ -296,10 +299,15 @@ heightDidChangeBy:(CGFloat)height
         _commitButtonItem.button.alpha = 0.4;
         _commitButtonItem.button.backgroundColor = [UIColor blackColor];
     }
+    if (_delegate && [_delegate respondsToSelector:@selector(textBar:textDidChangeTo:)]) {
+        [_delegate textBar:self textDidChangeTo:text];
+    }
 }
 
 - (void)textView:(LPFooterTextView *)textView didCommitWithText:(NSString *)text {
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(textBar:didCommitWithText:)]) {
+        [_delegate textBar:self didCommitWithText:text];
+    }
 }
 
 #pragma mark - Action
@@ -323,6 +331,10 @@ heightDidChangeBy:(CGFloat)height
     [UIView animateWithDuration:duration animations:^{
         [self __layoutSubviews];
     }];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(textBar:keyboardWillChangeFrame:)]) {
+        [_delegate textBar:self keyboardWillChangeFrame:info];
+    }
 }
 
 @end

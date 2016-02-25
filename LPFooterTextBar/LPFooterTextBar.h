@@ -19,6 +19,8 @@
     withDuration:(CGFloat)duration;
 - (void)textBar:(LPFooterTextBar *)textBar textDidChangeTo:(NSString *)text;
 - (void)textBar:(LPFooterTextBar *)textBar didCommitWithText:(NSString *)text;
+- (void)textBar:(LPFooterTextBar *)textBar
+keyboardWillChangeFrame:(NSDictionary *)userInfo;
 
 @end
 
@@ -39,6 +41,8 @@ typedef NS_ENUM(NSInteger, LPBounceMode) {
 @property (nonatomic, strong) NSArray<LPFooterTextItem *> *rightBarButtonItems;
 
 @property (nonatomic, assign) LPBounceMode bounceMode;
+
+@property (nonatomic, weak) id<LPFooterTextBarDelegate> delegate;
 
 - (BOOL)resignFirstResponder;
 

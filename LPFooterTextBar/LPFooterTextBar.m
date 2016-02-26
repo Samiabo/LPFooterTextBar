@@ -325,7 +325,6 @@ heightDidChangeBy:(CGFloat)height
     NSDictionary *info = [notification userInfo];
     CGRect beginKeyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGRect endKeyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    NSLog(@"%@", [info objectForKey:UIKeyboardFrameEndUserInfoKey]);
     CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     
     _yOffset = endKeyboardRect.origin.y - beginKeyboardRect.origin.y;

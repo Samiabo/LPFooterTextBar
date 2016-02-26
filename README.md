@@ -17,11 +17,7 @@
 * 支持在输入框左右添加个数不限的按钮。
 * 左右按钮位置高度可调。
 * 可动态改变LPFooterTextBar的大小。
-	
-[图片备用链接](http://c.picphotos.baidu.com/album/s%3D680%3Bq%3D90/sign=a0c4b3138cd4b31cf43c97b3b7ed5642/77c6a7efce1b9d1617d33231f4deb48f8c54644e.jpg)
 
 <img src = "https://github.com/xiaofei86/LPFooterTextBar/raw/master/Images/1.gif" width = 373>
-
-[图片备用链接](http://d.picphotos.baidu.com/album/s%3D680%3Bq%3D90/sign=09c43b7eafd3fd1f3209a13200755422/63d0f703918fa0ec83b5cc5d219759ee3d6ddb74.jpg)
 
 <img src = "https://github.com/xiaofei86/LPFooterTextBar/raw/master/Images/2.gif" width = 373>

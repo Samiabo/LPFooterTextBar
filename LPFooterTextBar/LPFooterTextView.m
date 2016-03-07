@@ -36,7 +36,6 @@ static CGFloat duration = 0.25;
         self.returnKeyType = UIReturnKeySend;
         self.enablesReturnKeyAutomatically = YES;
         self.layoutManager.allowsNonContiguousLayout = NO;
-        self.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
     }
     return self;
 }
@@ -69,6 +68,15 @@ static CGFloat duration = 0.25;
 - (void)setReturnToCommit:(BOOL)returnToCommit {
     _returnToCommit = returnToCommit;
     self.returnKeyType = UIReturnKeyDefault;
+}
+
+- (void)setKeyboardDismissMode:(UIScrollViewKeyboardDismissMode)keyboardDismissMode {
+    if ([self isKindOfClass:NSClassFromString(@"LPFooterTextBar")]) {
+        [super setKeyboardDismissMode:UIScrollViewKeyboardDismissModeNone];
+        NSLog(@"Can't set keyboardDismissMode when use LPFooterTextBar");
+    } else {
+        [super setKeyboardDismissMode:keyboardDismissMode];
+    }
 }
 
 #pragma mark - Commit

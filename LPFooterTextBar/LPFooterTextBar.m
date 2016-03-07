@@ -50,8 +50,14 @@
                          object:nil];
         
         [self __setNeedsLayout];
+        
+        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    NSLog(@"%@", change);
 }
 
 - (void)dealloc {
@@ -101,10 +107,6 @@
         [_commitButtonItem.button removeFromSuperview];
     }
     _commitButtonItem = commitButtonItem;
-    _commitButtonItem.button.enabled = NO;
-    _commitButtonItem.button.alpha = 0.4;
-    _commitButtonColor = _commitButtonItem.button.backgroundColor;
-    _commitButtonItem.button.backgroundColor = [UIColor blackColor];
     [_commitButtonItem.button addTarget:self action:@selector(textDidCommit:)
                        forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_commitButtonItem.button];
@@ -129,6 +131,12 @@
 
 - (void)__layoutSubviews {
     _needLayout = YES;
+    
+    if (!_commitButtonColor) {
+        _commitButtonColor = _commitButtonItem.button.backgroundColor;
+    }
+    [self updateCommitButtonColor];
+    
     if (_yOffset) {
         if (_bounceMode == LPBounceModeTextBar) {
             CGRect frame = self.frame;
@@ -290,7 +298,14 @@ heightDidChangeBy:(CGFloat)height
 }
 
 - (void)textView:(LPFooterTextView *)textView textDidChangeTo:(NSString *)text {
-    if (text.length) {
+    [self updateCommitButtonColor];
+    if (_delegate && [_delegate respondsToSelector:@selector(textBar:textDidChangeTo:)]) {
+        [_delegate textBar:self textDidChangeTo:text];
+    }
+}
+
+- (void)updateCommitButtonColor {
+    if (_textView.text.length) {
         _commitButtonItem.button.enabled = YES;
         _commitButtonItem.button.alpha = 1.0;
         _commitButtonItem.button.backgroundColor = _commitButtonColor;
@@ -298,9 +313,6 @@ heightDidChangeBy:(CGFloat)height
         _commitButtonItem.button.enabled = NO;
         _commitButtonItem.button.alpha = 0.4;
         _commitButtonItem.button.backgroundColor = [UIColor blackColor];
-    }
-    if (_delegate && [_delegate respondsToSelector:@selector(textBar:textDidChangeTo:)]) {
-        [_delegate textBar:self textDidChangeTo:text];
     }
 }
 

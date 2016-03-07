@@ -31,11 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGRect frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67,
-                              CGRectGetWidth(self.view.bounds), 67);
-    _footerTextBar = [[LPFooterTextBar alloc] initWithFrame:frame];
+//    CGRect frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - 67,
+//                              CGRectGetWidth(self.view.bounds), 67);
+    _footerTextBar = [[LPFooterTextBar alloc] initWithFrame:CGRectZero];
     _footerTextBar.textView.font = [UIFont systemFontOfSize:17];
     _footerTextBar.textView.placeholder = @"请输入文字";
+//    _footerTextBar.textView.text = @"请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字请输入文字";
     
     UIButton *button = [UIButton new];
     button.backgroundColor = self.view.tintColor;
@@ -44,11 +45,11 @@
     _footerTextBar.commitButtonItem = [[LPFooterTextItem alloc] initWithButton:button];
     [self.view addSubview:_footerTextBar];
     
-//    [_footerTextBar mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.equalTo(self.view);
-//        make.height.mas_equalTo(67);
-//        make.bottom.equalTo(self.view);
-//    }];
+    [_footerTextBar mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(67);
+        make.bottom.equalTo(self.view);
+    }];
 }
 
 - (void)touchesBegan {

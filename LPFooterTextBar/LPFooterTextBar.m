@@ -50,14 +50,8 @@
                          object:nil];
         
         [self __setNeedsLayout];
-        
-        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    NSLog(@"%@", change);
 }
 
 - (void)dealloc {
